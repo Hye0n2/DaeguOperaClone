@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>layout</title>
+
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/icorn.min.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+
+    <link href="css/jquery.bxslider.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="homepage">
+        <header class="main-header">
+            <div class="logo">
+                <img src="image/logo.png" alt="로고 이미지">
+                <img src="image/logo_un.png" alt="로고 이미지2">
+            </div>
+
+            <div class="navi-box">
+                <div class="nav1">
+                    <ul>
+                        <li>Home</li>
+                        <li>Cocoa</li>
+                        <li>Login</li>
+                        <li>Join</li>
+                    </ul>
+                    <select name="" id="" class="language">
+                        <option selected>Kor</option>
+                        <option>Eng</option>
+                    </select>
+                </div>
+
+                <nav class="nav2">
+                    <ul class="navbar-menu">
+                        <li><a href="#">공연안내<br>Performance</a></li>
+                        <li><a href="#">티켓예매<br>Ticket</a></li>
+                        <li><a href="#">아카데미<br>Academy</a></li>
+                        <li><a href="#">대관안내<br>Rental</a></li>
+                        <li><a href="#">이용안내<br>Guide</a></li>
+                    </ul>
+                    <span class="open-slide" onclick="openSideMenu()"><a href="#">
+                            <i class="fas fa-align-justify"></i>
+                        </a>
+                    </span>
+                </nav>
+
+                <div id="side-menu" class="side-nav">
+                    <a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
+                    <div class="side-nav-item">
+                        <a href="#">공연안내<br>Performance</a>
+                        <a href="#">티켓예매<br>Ticket</a>
+                        <a href="#">아카데미<br>Academy</a>
+                        <a href="#">대관안내<br>Rental</a>
+                        <a href="#">이용안내<br>Guide</a>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <section class="main">
+            <div class="left-side-bar">
+                <h3>기관소개</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fas fa-comment"></i></a></li>
+                    <li><a href="#"><i class="far fa-caret-square-right"></i></a></li>
+                    <li><a href="#"><i class="fas fa-image"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <ul class="bxslider">
+                    <li><img src="image/img_carmen01.jpg" alt="카르멘"></li>
+                    <li><img src="image/img_festival03.jpg" alt="페스티벌"></li>
+                    <li><img src="image/img_matine01.jpg" alt="마티네"></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="slide-page">
+            <ul class="slide">
+                <li><img src="image/mini-slide/mini-slide0.png" alt="슬라이드 이미지"></li>
+                <li><img src="image/mini-slide/mini-slide1.png" alt="슬라이드 이미지1"></li>
+                <li><img src="image/mini-slide/mini-slide2.png" alt="슬라이드 이미지2"></li>
+                <li><img src="image/mini-slide/mini-slide3.png" alt="슬라이드 이미지3"></li>
+                <li><img src="image/mini-slide/mini-slide4.png" alt="슬라이드 이미지4"></li>
+                <li><img src="image/mini-slide/mini-slide5.png" alt="슬라이드 이미지5"></li>
+                <li><img src="image/mini-slide/mini-slide6.png" alt="슬라이드 이미지6"></li>
+            </ul>
+        </section>
+    </div>
+
+
+
+    <script>
+        function openSideMenu(){
+            document.getElementById("side-menu").style.width = "250px";
+        }
+
+        function closeSideMenu() {
+            document.getElementById("side-menu").style.width = "0px";
+        }
+    </script>
+
+    <script>
+        $('.bxslider').bxSlider({
+            auto: true,
+            minSlides: 3,
+            maxSlides: 1,
+            slideWidth: 1250,
+            slideMargin: 10,
+            moveSlides: 1,
+        });
+    </script>
+
+    <script>
+        $(window).scroll(function () {
+            const scroll = $(document).scrollTop();
+
+            if (scroll > 50) {
+                $(".left-side-bar").css("top", "10px");
+            } else {
+                $(".left-side-bar").css("top", "100px");
+            }
+        })
+    </script>
+
+    <script>
+        function moveSlide() {
+            const margin = 10;
+
+            $(".slide").animate({
+                'margin-left': -330
+            }, 2000, replace)
+        }
+
+        function replace() {
+            const li = $(".slide > li:eq(0)");
+            li.remove();
+            $(".slide").css("margin-left", "0px");
+            $(".slide").append(li);
+        }
+
+        let slide = setInterval(function () {
+            moveSlide();
+        }, 2000);
+
+        $(".slide > li").mouseover(function () {
+            clearInterval(slide);
+        }).mouseleave(function () {
+            slide = setInterval(function () {
+                moveSlide();
+            }, 2000);
+        })
+    </script>
+
+</body>
+
+</html>
